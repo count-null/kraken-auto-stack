@@ -58,7 +58,8 @@ def marketBuy(pair, amt):
     print("BUY %s %s" % (pair, amt))
 
 def worthIt(alt, amt):
-    return True
+    a = getAltConfig(alt)
+    return getPrice(alt, amt) > a['minSell']
 
 def processTrades():
     bal = getBalance()
@@ -69,13 +70,14 @@ def processTrades():
     sellable = getSellableUnits(tradable, reserves)
     if sellable:
         printTable(sellable, "Ready to Trade:")
+        for alt in sellable:
+            amt = sellable[alt]
+            if worthIt(alt, amt):
+    	        pair = getPair(alt)
+    	        marketBuy(pair, amt)
     else:
         print("No alts to trade. Good job!")
-    for alt in sellable:
-        amt = sellable[alt]
-        if worthIt(alt, amt):
-	        pair = getPair(alt)
-	        marketBuy(pair, amt)
+
 
 def printTable(vals, desc):
     print()

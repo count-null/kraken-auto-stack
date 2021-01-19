@@ -1,23 +1,22 @@
 {
-  "alts": [
-    {
-      "name": "ETH",
-      "minBalance": 0.5,
+  "alts": {
+    "ETH": {
+      "minBalance": 0,
+      "minSell": 0.1,
       "quote": "ETH",
       "buy": "XBT"
-    },	  
-    {
-      "name": "STORJ",
+    },
+    "STORJ": {
       "minBalance": 50,
+      "minSell": 10,
       "quote": "USD",
       "buy": "XBT"
     },
-    {
-      "name": "XXMR",
+    "XXMR": {
       "minBalance": 10,
+      "minSell": 0,
       "quote": "ZUSD",
-      "buy": "XBT"
+      "buy": "XXBT"
     }
-  ]
- }
-
+  }
+}
