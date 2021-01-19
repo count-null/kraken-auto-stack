@@ -1,6 +1,7 @@
-# Kraken Exchange Auto Stack Sats
+# Kraken Auto Stack Sats
 
 Too many shitcoins in your Kraken account? Trade them for BTC!
+
 
 ## Features
 
@@ -8,6 +9,7 @@ Too many shitcoins in your Kraken account? Trade them for BTC!
 - [x] Set a min balance to keep for each alt
 - [x] Determine worthwhile trades (user-defined)
 - [x] Create market buy orders (untested)
+- [x] Support for fiat/shitcoin cost averaging (when used with cron)
 - [ ] Auto widthdraw to saved address
 
 ## Warning
@@ -16,7 +18,7 @@ You are responsible for the code you run.
 
 ## Dependencies
 
-This script depends on `krakenex` ([source](https://github.com/veox/python3-krakenex)) which itself depends on ([requests](https://github.com/psf/requests))
+This script depends on ([krakenex](https://github.com/veox/python3-krakenex)) which itself depends on ([requests](https://github.com/psf/requests))
 
 ## Installation
 
@@ -34,7 +36,7 @@ From the repo folder,
 
 Put your API keys in `kraken.key`
 
-`mv example.config.json` `config.json`
+`cp example.config.json` `config.json`
 
 Edit `config.json` (See Config Options)
 
@@ -44,37 +46,40 @@ Edit `config.json` (See Config Options)
 
 The `alts` section defines the selling rules for each alt.
 
-e.x. Sell ETH for BTC. Sell all of it. Don't sell less than 0.1 ETH at a time.
+e.x. Sell ETH for BTC. Sell all of it at once. Only if more than 0.1 ETH available.
 
 ```
 "ETH": {
   "minBalance": 0,
   "minSell": 0.1,
+  "maxSell": false,
   "quote": "ETH",
   "buy": "XBT"
 },
 ```
 
-e.x. Sell STORJ for BTC. Keep at least 50 USD worth of STORJ at all times. Don't sell less than 10 USD worth at a time.
+e.x. Sell STORJ for BTC. Sell only 10 USD worth of STORJ. Keep at least 50 USD worth of STORJ at all times. 
 
 ```
 "STORJ": {
   "minBalance": 50,
   "minSell": 10,
+  "maxSell": 10,
   "quote": "USD",
   "buy": "XBT"
 },
 ```
 
-e.x. Sell XMR for BTC. Keep at least 10 USD on hand. Warning a zero minSell may incur cost prohibitive fees.
+e.x. Sell XMR for BTC. Keep at least 100 USD worth on hand. Dollar cost average 10 USD. Warning: a zero `minSell` may incur cost prohibitive fees by trying to sell dust.
 
 ```
 "XXMR": {
-  "minBalance": 10,
+  "minBalance": 100,
   "minSell": 0,
+  "maxSell": 10
   "quote": "ZUSD",
   "buy": "XXBT"
 },
 ```
 
-Older pairs use the X/Z format for crypto/fiat. You will need to specify those explicitly. [Find your ticker](https://support.kraken.com/hc/en-us/articles/360000920306-Ticker-pairs).
+Older pairs use the X/Z prefix for crypto/fiat tickers. You will need to specify those explicitly. [Find your pair!](https://support.kraken.com/hc/en-us/articles/360000920306-Ticker-pairs)

@@ -21,8 +21,8 @@ def getTradableBalance(bal):
         tb[alt] = float(bal[alt])
     return tb
 
-def getPrice(asset, units):
-    pair = asset+units
+def getPrice(asset, quote):
+    pair = asset+quote
     ticker = k.query_public('Ticker', {'pair': pair})
     last_close_raw = ticker["result"][pair]["c"]
     last_close = last_close_raw[0]
@@ -66,8 +66,17 @@ def worthIt(alt, amt):
     a = getAltConfig(alt)
     return getPrice(alt, amt) > a['minSell']
 
+def getVolume(alt, amt):
+    a = getAltConfig(alt)
+    if a['maxSell']:
+        stackSize = a['maxSell'] / getPrice(alt, a['quote'])
+        if amt > stackSize:
+            return stackSize
+    return amt
+
 def processTrades():
-    bal = getBalance()
+    #bal = getBalance()
+    bal = {"STORJ": 1234.2342234, "XXMR": 3423.232355}
     printTable(bal, "Account Balances:")
     tradable = getTradableBalance(bal)
     reserves = getReserveUnits(tradable)
@@ -78,7 +87,8 @@ def processTrades():
         for alt in sellable:
             amt = sellable[alt]
             if worthIt(alt, amt):
-    	        marketBuy(alt, amt)
+                vol = getVolume(alt, amt)
+    	        marketBuy(alt, vol)
     else:
         print("No alts to trade. Good job!")
 
