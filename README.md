@@ -4,9 +4,12 @@ Too many shitcoins in your Kraken account? Trade them for BTC!
 
 ## Features 
 
- - List the alt tickers you want to sell
- - Set a min balance to keep for each alt
-
+ - [x] List the alt tickers you want to sell
+ - [x] Set a min balance to keep for each alt
+ - [ ] Determine worthwhile trades (fee adjusted)
+ - [ ] Create market buy orders
+ - [ ] Auto widthdraw to saved address
+ 
 ## Warning
 
 You are responsible for the code you run. 
