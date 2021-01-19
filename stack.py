@@ -15,13 +15,11 @@ c = getConfig()
 def getBalance():
     return k.query_private('Balance')['result']
 
-
 def getTradableBalance(bal):
     tb = {}
     for alt in c['alts']:
         tb[alt] = float(bal[alt])
     return tb
-
 
 def getPrice(asset, units):
     pair = asset+units
@@ -54,7 +52,14 @@ def getSellableUnits(tradable, reserves):
 def getPair(alt):
   return "%s%s" % (alt, c['alts'][alt]['buy'])
 
-def marketBuy(pair, amt):
+def marketBuy(alt, amt):
+    pair = getPair(alt)
+    k.query_private('AddOrder', {
+        'pair': pair,
+        'type': 'buy',
+        'ordertype': 'market',
+        'volume': amt
+    })
     print("BUY %s %s" % (pair, amt))
 
 def worthIt(alt, amt):
@@ -73,8 +78,7 @@ def processTrades():
         for alt in sellable:
             amt = sellable[alt]
             if worthIt(alt, amt):
-    	        pair = getPair(alt)
-    	        marketBuy(pair, amt)
+    	        marketBuy(alt, amt)
     else:
         print("No alts to trade. Good job!")
 
