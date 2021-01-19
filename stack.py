@@ -35,12 +35,18 @@ def getAltConfig(ticker):
         if alt == ticker:
             return c['alts'][alt]
 
-def getSellableUnits(tradable):
+def getReserveUnits(tradable):
+    reserve = {}
+    for alt in tradable:
+        a = getAltConfig(alt)
+        reserve[alt] = a['minBalance'] / getPrice(alt, a['quote'])
+    return reserve
+
+def getSellableUnits(tradable, reserves):
     # units of each tradable asset can be sold
     sellable = {}
     for alt in tradable:
-        a = getAltConfig(alt)
-        unitsOfMin = a['minBalance'] / getPrice(alt, a['quote'])
+        unitsOfMin = reserves[alt]
         if tradable[alt] > unitsOfMin:
             sellable[alt] = tradable[alt] - unitsOfMin
     return sellable
@@ -58,7 +64,9 @@ def processTrades():
     bal = getBalance()
     printTable(bal, "Account Balances:")
     tradable = getTradableBalance(bal)
-    sellable = getSellableUnits(tradable)
+    reserves = getReserveUnits(tradable)
+    printTable(reserves, "Minimum Required Balances:")
+    sellable = getSellableUnits(tradable, reserves)
     if sellable:
         printTable(sellable, "Ready to Trade:")
     else:
