@@ -1,6 +1,6 @@
 # Kraken Exchange Auto Stack Sats
 
-Too many shitcoins in your kraken balance? Trade them for BTC! 
+Too many shitcoins in your Kraken account? Trade them for BTC!
 
 ## Features 
 
@@ -33,13 +33,15 @@ Put your API keys in `kraken.key`
 
 `mv example.config.json` `config.json`
 
-Edit `config.json` to your liking.
+Edit `config.json` (See Config Options)
 
 `python3 stack.py` or schedule with cron.
 
 ## Config Options
 
-This is a list of rules for each alt eligible to trade. Here are some examples:
+The `alts` section defines the selling rules for each alt. 
+
+e.x. Sell ETH for BTC. Sell all of it.
 ```
 "ETH": {
   "minBalance": 0,
@@ -47,8 +49,8 @@ This is a list of rules for each alt eligible to trade. Here are some examples:
   "buy": "XBT"
 },
 ```
-Sell ETH for XBT. Sell all of it. 
-
+ 
+e.x. Sell STORJ for BTC. Keep at least 50 USD worth of STORJ at all times.
 ```
 "STORJ": {
   "minBalance": 50,
@@ -56,8 +58,7 @@ Sell ETH for XBT. Sell all of it.
   "buy": "XBT"
 },
 ```
-Sell STORJ for XBT. Keep a minimum balance of 50 USD worth of STORJ
-
+e.x. Sell XMR for BTC. Keep at least 10 USD on hand. 
 ```
 "XXMR": {
   "minBalance": 10,
