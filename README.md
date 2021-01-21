@@ -18,7 +18,7 @@ You are responsible for the code you run.
 
 ## Dependencies
 
-This script depends on ([krakenex](https://github.com/veox/python3-krakenex)) which itself depends on ([requests](https://github.com/psf/requests))
+This script depends on [krakenex](https://github.com/veox/python3-krakenex) which itself depends on [requests](https://github.com/psf/requests)
 
 ## Installation
 
