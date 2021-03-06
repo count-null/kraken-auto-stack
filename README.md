@@ -8,7 +8,7 @@ Too many shitcoins in your Kraken account? Trade them for BTC!
 - [x] List the alt tickers you want to sell
 - [x] Set a min balance to keep for each alt
 - [x] Determine worthwhile trades (user-defined)
-- [x] Create market buy orders (untested)
+- [x] Create market buy orders
 - [x] Support for fiat/shitcoin cost averaging (when used with cron)
 - [ ] Auto widthdraw to saved address
 
