@@ -3,18 +3,21 @@
     "ETH": {
       "minBalance": 0,
       "minSell": 0.1,
+      "maxSell": 0.1,
       "quote": "ETH",
       "buy": "XBT"
     },
     "STORJ": {
       "minBalance": 50,
       "minSell": 10,
+      "maxSell": 25,
       "quote": "USD",
       "buy": "XBT"
     },
     "XXMR": {
       "minBalance": 10,
       "minSell": 0,
+      "maxSell": false,
       "quote": "ZUSD",
       "buy": "XXBT"
     }
