@@ -10,6 +10,7 @@ Too many shitcoins in your Kraken account? Trade them for BTC!
 - [x] Determine worthwhile trades (user-defined)
 - [x] Create market buy orders
 - [x] Support for fiat/shitcoin cost averaging (when used with cron)
+- [ ] Send an email report after every stack
 - [ ] Auto widthdraw to saved address
 
 ## Warning
