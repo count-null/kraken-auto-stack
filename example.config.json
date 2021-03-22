@@ -5,21 +5,32 @@
       "minSell": 0.1,
       "maxSell": 0.1,
       "quote": "ETH",
-      "buy": "XBT"
+      "buy": "XBT",
+      "pair": "ETHXBT"
     },
     "STORJ": {
       "minBalance": 50,
       "minSell": 10,
       "maxSell": 25,
       "quote": "USD",
-      "buy": "XBT"
+      "buy": "XBT",
+      "pair": "STORJXBT"
     },
     "XXMR": {
       "minBalance": 10,
       "minSell": 0,
       "maxSell": false,
       "quote": "ZUSD",
-      "buy": "XXBT"
+      "buy": "XXBT",
+      "pair": "XXBTXXMR"
+    },
+    "XXBT": {
+      "minBalance": 0,
+      "minSell": 0,
+      "maxSell": 50,
+      "quote": "USDT",
+      "buy": "USDT",
+      "pair": "XBTUSDT"
     }
   }
 }

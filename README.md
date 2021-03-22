@@ -55,7 +55,8 @@ e.x. Sell ETH for BTC. Sell all of it at once. Only if more than 0.1 ETH availab
   "minSell": 0.1,
   "maxSell": false,
   "quote": "ETH",
-  "buy": "XBT"
+  "buy": "XBT",
+  "pair": "ETHXBT"
 },
 ```
 
@@ -67,9 +68,26 @@ e.x. Sell STORJ for BTC. Sell only 10 USD worth of STORJ. Keep at least 50 USD w
   "minSell": 10,
   "maxSell": 10,
   "quote": "USD",
-  "buy": "XBT"
+  "buy": "XBT",
+  "pair": "STORJXBT"
 },
 ```
+
+e.x. Sell USDT for BTC. Sell only 50 USDT at a time. Sell all of it.. 
+
+```
+"XXBT": {
+  "minBalance": 0,
+  "minSell": 0,
+  "maxSell": 50,
+  "quote": "USDT",
+  "buy": "USDT"
+  "pair": "XBTUSDT"
+},
+```
+
+Note that with stablecoins, you must "buy" the stablecoin and list XXBT as the alt. Don't worry, it sells them.
+
 
 e.x. Sell XMR for BTC. Keep at least 100 USD worth on hand. Dollar cost average 10 USD. Warning: a zero `minSell` may incur cost prohibitive fees by trying to sell dust.
 
@@ -79,7 +97,8 @@ e.x. Sell XMR for BTC. Keep at least 100 USD worth on hand. Dollar cost average 
   "minSell": 0,
   "maxSell": 10
   "quote": "ZUSD",
-  "buy": "XXBT"
+  "buy": "XXBT",
+  "pair": "XXMRXXBT"
 },
 ```
 

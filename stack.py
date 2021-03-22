@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
+import datetime
 import krakenex
 import json
 
-projectPath = '/home/admin/download/kraken-auto-stack/'
+projectPath = '/mnt/hdd/git/kraken-auto-stack/'
 
 k = krakenex.API()
 k.load_key(projectPath + 'kraken.key')
@@ -77,16 +78,20 @@ def getSellableUnits(tradable, reserves):
     return sellable
 
 def getPair(alt):
-  return "%s%s" % (alt, c['alts'][alt]['buy'])
+  return c['alts'][alt]['pair']
 
-def marketBuy(alt, amt):
+def marketBuy(alt, amt, orderType):
     pair = getPair(alt)
+    print(pair)
+    print(amt)
+    print(orderType)
     response = k.query_private('AddOrder', {
         'pair': pair,
-        'type': 'sell',
+        'type': orderType,
         'ordertype': 'market',
         'volume': str(amt)
     })
+    print(response)
     print("%s txid %s" % (response['result']['descr']['order'], response['result']['txid'][0]))
 
 def worthIt(alt, amt):
@@ -122,7 +127,10 @@ def processTrades():
         printTable(minOrders, "Kraken Min Orders:")
         for alt in aboutToSell:
             if aboutToSell[alt] > float(minOrders[alt]):
-                marketBuy(alt, aboutToSell[alt])
+                order = 'sell'
+                if getPair(alt).startswith('XBT'):
+                    order = 'buy'
+                marketBuy(alt, aboutToSell[alt], order)
             else:
                 print("%s volume does not meet Kraken's minimum requirements for trade." % (alt))
     else:
@@ -130,7 +138,7 @@ def processTrades():
 
 
 def printTable(vals, desc):
-    print()
+    print(datetime.datetime.now())
     print(desc)
     for key in vals:
         print("%s %s" % (key, vals[key]))
